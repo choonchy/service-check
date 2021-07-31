@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Navbar = () => {
+const Navbar = ({ currentPage, handlePageChange }) => {
 	const [isOpen, setisOpen] = useState(false);
 
 	function handleClick() {
@@ -41,18 +41,21 @@ const Navbar = () => {
 					<a
 						href="/#"
 						className="m-1 p-2 hover:bg-purple-600 hover:text-white duration-300 rounded-xl"
+						onClick={() => handlePageChange('About')}
 					>
 						About
 					</a>
 					<a
 						href="/#"
 						className="m-1 p-2 hover:bg-purple-600 hover:text-white duration-300 rounded-xl"
+						onClick={() => handlePageChange('FAQ')}
 					>
 						FAQ
 					</a>
 					<a
 						href="/#"
 						className="m-1 p-2 hover:bg-purple-600 hover:text-white duration-300 rounded-xl"
+						onClick={() => handlePageChange('LogIn')}
 					>
 						Log In/Sign Up
 					</a>
