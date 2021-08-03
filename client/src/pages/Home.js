@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
+import UserList from '../components/UserList';
+import VehicleList from '../components/VehicleList';
 
-function Home() {
+export default function Home() {
 	const [userInput, setUserInput] = useState('');
 
 	const handleInputChange = (e) => {
 		const { value } = e.target;
-
 		return setUserInput(value);
 	};
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
-		alert('Submitted successfully!');
-		setUserInput('');
+		window.location.href = `${window.location.href}vehicle-search`;
 	};
 
 	return (
@@ -20,8 +20,8 @@ function Home() {
 			<h2 className="m-2 text-3xl text-purple-500 text-center mb-12">
 				Welcome to ServiceCheck™
 			</h2>
-			<div className="flex flex-col m-3 md:flex-row md:h-1/4">
-				<section className="md:w-6/12">
+			<div className="flex flex-col items-center justify-center m-3 md:flex-row md:h-1/4">
+				<section className="md:w-5/12">
 					<p className="m-2 text-center text-purple-600 italic border-b-2 border-purple-100 p-2">
 						When life gives you lemons, make sure you don't buy one!
 					</p>
@@ -31,7 +31,7 @@ function Home() {
 						nasty surprises
 					</p>
 				</section>
-				<form className="flex flex-col items-center md:w-6/12 m-2">
+				<form className="flex flex-col items-center md:w-5/12 m-2">
 					<input
 						className="w-11/12 md:w-9/12 bg-purple-100 rounded-2xl text-center p-3 m-1"
 						value={userInput}
@@ -66,5 +66,3 @@ function Home() {
 		</div>
 	);
 }
-
-export default Home;

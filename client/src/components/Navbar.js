@@ -39,23 +39,20 @@ const Navbar = ({ currentPage, handlePageChange }) => {
 			>
 				<li className="flex flex-col md:flex-row text-purple-600">
 					<a
-						href="/#"
-						className="m-1 p-2 hover:bg-purple-600 hover:text-white duration-300 rounded-xl"
-						onClick={() => handlePageChange('About')}
+						href="/about"
+						className="m-1 p-2 hover:bg-purple-600 hover:text-white hover:shadow-inner duration-300 rounded-xl"
 					>
 						About
 					</a>
 					<a
-						href="/#"
-						className="m-1 p-2 hover:bg-purple-600 hover:text-white duration-300 rounded-xl"
-						onClick={() => handlePageChange('FAQ')}
+						href="/faq"
+						className="m-1 p-2 hover:bg-purple-600 hover:text-white hover:shadow-inner duration-300 rounded-xl"
 					>
 						FAQ
 					</a>
 					<a
-						href="/#"
-						className="m-1 p-2 hover:bg-purple-600 hover:text-white duration-300 rounded-xl"
-						onClick={() => handlePageChange('LogIn')}
+						href="/login"
+						className="m-1 p-2 hover:bg-purple-600 hover:text-white hover:shadow-inner duration-300 rounded-xl"
 					>
 						Log In/Sign Up
 					</a>

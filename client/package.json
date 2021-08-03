@@ -2,8 +2,9 @@
 	"name": "service-check",
 	"version": "0.1.0",
 	"private": true,
-	"proxy": "http://localhose:3001",
+	"proxy": "http://localhost:3001",
 	"dependencies": {
+		"@apollo/client": "3.3.5",
 		"@craco/craco": "^6.2.0",
 		"@testing-library/jest-dom": "^5.14.1",
 		"@testing-library/react": "^11.2.7",

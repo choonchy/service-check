@@ -6,15 +6,32 @@ const typeDefs = gql`
 		fullName: String!
 		email: String!
 		password: String!
+		orders: [Order]
 	}
 
 	type Order {
-		orderDate: Int
+		_id: ID
+		orderDate: String
+		vehicle: Vehicle
+		user: User
+	}
+
+	type Vehicle {
+		_id: ID
+		vin: String
+		regoNumber: String
+		make: String
+		model: String
+		colour: String
 	}
 
 	type Query {
 		users: [User]
 		orders: [Order]
+		vehicles: [Vehicle]
+		user(_id: ID!): User
+		vehicle(_id: ID!): Vehicle
+		order(_id: ID!): Order
 	}
 `;
 

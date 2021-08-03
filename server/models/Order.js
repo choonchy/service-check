@@ -6,10 +6,14 @@ const orderSchema = new Schema({
 		default: Date.now,
 		required: true,
 	},
-	// user: {
-	// 	type: Schema.Types.ObjectId,
-	// 	ref: 'User',
-	// },
+	user: {
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+	},
+	vehicle: {
+		type: Schema.Types.ObjectId,
+		ref: 'Vehicle',
+	},
 });
 
 const Order = model('Order', orderSchema);
