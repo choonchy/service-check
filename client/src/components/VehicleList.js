@@ -1,31 +1,27 @@
-import React from 'react';
-import { useQuery } from '@apollo/client';
-import { QUERY_VEHICLES } from '../utils/queries';
+import React, { useContext } from 'react';
+import { vehicleContext } from '../pages/VehicleSearch';
 
 const VehicleList = () => {
-	const { loading, data } = useQuery(QUERY_VEHICLES);
-	console.log(data);
-	const vehicles = data?.vehicles || 'No vehicles found';
-	console.log(vehicles);
-	if (!vehicles.length) {
-		return <h3>No vehicles yet!</h3>;
-	}
+	const vehicle = useContext(vehicleContext);
+	console.log(vehicle);
+	const vehicleRender = (vehicle) => {
+		if (!vehicle) {
+			return null;
+		}
+		if (vehicle) {
+			return (
+				<div>
+					<p>{vehicle.vin}</p>
+					<p>{vehicle._id}</p>
+				</div>
+			);
+		}
+	};
 
 	return (
 		<div>
 			<h3>Vehicles</h3>
-			<div>
-				{!loading ? (
-					vehicles.map((vehicle) => (
-						<div key={vehicle._id}>
-							<p>{vehicle.vin}</p>
-							<p>{vehicle.regoNumber}</p>
-						</div>
-					))
-				) : (
-					<p>Loading...</p>
-				)}
-			</div>
+			<div>{() => vehicleRender(vehicle)}</div>
 		</div>
 	);
 };

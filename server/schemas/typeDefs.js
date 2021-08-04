@@ -30,7 +30,7 @@ const typeDefs = gql`
 		orders: [Order]
 		vehicles: [Vehicle]
 		user(_id: ID!): User
-		vehicle(_id: ID!): Vehicle
+		vehicle(vin: String): Vehicle
 		order(_id: ID!): Order
 	}
 `;

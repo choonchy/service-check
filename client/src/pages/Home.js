@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import UserList from '../components/UserList';
-import VehicleList from '../components/VehicleList';
+// import UserList from '../components/UserList';
+// import VehicleList from '../components/VehicleList';
 
 export default function Home() {
 	const [userInput, setUserInput] = useState('');

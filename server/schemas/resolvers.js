@@ -14,8 +14,8 @@ const resolvers = {
 		user: async (_, { _id }) => {
 			return await User.findOne({ _id });
 		},
-		vehicle: async (_, { _id }) => {
-			return await Vehicle.findOne({ _id });
+		vehicle: async (_, { vin }) => {
+			return await Vehicle.findOne({ vin });
 		},
 		order: async (_, { _id }) => {
 			return await Order.findOne({ _id });
@@ -28,7 +28,10 @@ const resolvers = {
 			return user;
 		},
 		vehicle(parent) {
-			const vehicle = Vehicle.findOne({ _id: parent.vehicle });
+			const vehicle = Vehicle.findOne({
+				_id: parent.vehicle,
+				vin: parent.vehicle,
+			});
 			console.log(parent);
 			return vehicle;
 		},
