@@ -36,7 +36,7 @@ export const QUERY_VEHICLES = gql`
 `;
 
 export const QUERY_SINGLE_VEHICLE = gql`
-	query singleVehicle($id: ID!, $vin: String) {
+	query singleVehicle($vin: String) {
 		vehicle(vin: $vin) {
 			_id
 			vin

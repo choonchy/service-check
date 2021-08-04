@@ -1,20 +1,28 @@
+import React, { useState, useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
-import React, { useState, useEffect, createContext } from 'react';
-import VehicleList from '../components/VehicleList';
 import { QUERY_SINGLE_VEHICLE } from '../utils/queries';
+import { useVehicleContext } from '../utils/vehicleContext';
 
-export const vehicleContext = createContext();
-
-export default function VehicleSearch() {
-	const [executeSearch, { loading, data }] = useLazyQuery(QUERY_SINGLE_VEHICLE);
-
+function VehicleSearch() {
 	const [userInput, setUserInput] = useState('');
-	const [vehicle, setVehicle] = useState({});
+
+	const [executeSearch, { data }] = useLazyQuery(QUERY_SINGLE_VEHICLE);
+
+	const { vehicle, setVehicle } = useVehicleContext();
 
 	useEffect(() => {
 		setVehicle(data?.vehicle);
 		console.log(vehicle);
-	}, [data, vehicle]);
+	}, [data, vehicle, setVehicle]);
+
+	const searchVehicle = (vin) => {
+		executeSearch({
+			variables: {
+				vin,
+			},
+		});
+		console.log(data);
+	};
 
 	const handleInputChange = (e) => {
 		const { value } = e.target;
@@ -24,11 +32,7 @@ export default function VehicleSearch() {
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
 		console.log(userInput);
-		executeSearch({
-			variables: {
-				vin: userInput,
-			},
-		});
+		searchVehicle(userInput);
 	};
 
 	return (
@@ -51,9 +55,17 @@ export default function VehicleSearch() {
 					Submit
 				</button>
 			</form>
-			<vehicleContext.Provider value={vehicle}>
-				{!loading ? <VehicleList /> : <p>Loading...</p>}
-			</vehicleContext.Provider>
+			{!vehicle ? (
+				<p>No vehicles found</p>
+			) : (
+				<div>
+					<p>{vehicle.vin}</p>
+					<p>{vehicle.make}</p>
+					<p>{vehicle.model}</p>
+				</div>
+			)}
 		</div>
 	);
 }
+
+export default VehicleSearch;

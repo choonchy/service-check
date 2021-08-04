@@ -6,6 +6,7 @@ import LogIn from './pages/LogIn';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import VehicleSearch from './pages/VehicleSearch';
+import VehicleProvider from './utils/vehicleContext';
 
 const client = new ApolloClient({
 	uri: '/graphql',
@@ -25,7 +26,9 @@ function App() {
 						<LogIn />
 					</Route>
 					<Route exact path="/vehicle-search">
-						<VehicleSearch />
+						<VehicleProvider>
+							<VehicleSearch />
+						</VehicleProvider>
 					</Route>
 				</Switch>
 				<Footer />
