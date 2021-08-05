@@ -40,6 +40,9 @@ export const QUERY_SINGLE_VEHICLE = gql`
 		vehicle(vin: $vin) {
 			_id
 			vin
+			make
+			model
+			colour
 		}
 	}
 `;

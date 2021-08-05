@@ -6,12 +6,12 @@ const vehicleSeeds = require('./vehicleSeeds.json');
 
 db.once('open', async () => {
 	try {
-		// await User.deleteMany({});
-		// await User.create(userSeeds);
+		await User.deleteMany({});
+		await User.create(userSeeds);
 		await Order.deleteMany({});
 		await Order.create(orderSeeds);
-		// await Vehicle.deleteMany({});
-		// await Vehicle.create(vehicleSeeds);
+		await Vehicle.deleteMany({});
+		await Vehicle.create(vehicleSeeds);
 
 		console.log('all done!');
 		process.exit(0);

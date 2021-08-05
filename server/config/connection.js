@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
-mongoose.connect(
-	process.env.MONGODB_URI || 'mongodb://localhost/service-check',
-	{
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useCreateIndex: true,
-		useFindAndModify: false,
-	}
-);
+dotenv.config();
+
+mongoose.connect(process.env.MONGODB_URI, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	useCreateIndex: true,
+	useFindAndModify: false,
+});
 
 module.exports = mongoose.connection;
