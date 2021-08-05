@@ -16,6 +16,11 @@ const typeDefs = gql`
 		user: User
 	}
 
+	type Auth {
+		token: ID!
+		user: User
+	}
+
 	type Vehicle {
 		_id: ID
 		vin: String
@@ -32,6 +37,11 @@ const typeDefs = gql`
 		user(_id: ID!): User
 		vehicle(vin: String): Vehicle
 		order(_id: ID!): Order
+	}
+
+	type Mutation {
+		addUser(fullName: String!, email: String!, password: String!): Auth
+		login(email: String!, password: String!): Auth
 	}
 `;
 

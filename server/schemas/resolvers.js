@@ -1,4 +1,6 @@
+const { AuthenticationError } = require('apollo-server-express');
 const { User, Vehicle, Order } = require('../models');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
 	Query: {
@@ -11,8 +13,11 @@ const resolvers = {
 		orders: async () => {
 			return await Order.find();
 		},
-		user: async (_, { _id }) => {
-			return await User.findOne({ _id });
+		user: async (_, args, context) => {
+			if (context.user) {
+				return User.findOne({ _id: context.user._id }).populate('orders');
+			}
+			throw new AuthenticationError('You must be logged in!');
 		},
 		vehicle: async (_, { vin }) => {
 			return await Vehicle.findOne({ vin });
@@ -41,6 +46,31 @@ const resolvers = {
 			const orders = Order.find({ user: parent._id });
 			console.log(parent);
 			return orders;
+		},
+	},
+
+	Mutation: {
+		addUser: async (_, { fullName, email, password }) => {
+			const user = await User.create({ fullName, email, password });
+			const token = signToken(user);
+			return { token, user };
+		},
+		login: async (parent, { email, password }) => {
+			const user = await User.findOne({ email });
+
+			if (!user) {
+				throw new AuthenticationError('No user found with this email address');
+			}
+
+			const correctPw = await user.isCorrectPassword(password);
+
+			if (!correctPw) {
+				throw new AuthenticationError('Incorrect credentials');
+			}
+
+			const token = signToken(user);
+
+			return { token, user };
 		},
 	},
 };
