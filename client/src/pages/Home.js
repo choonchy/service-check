@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-// import UserList from '../components/UserList';
-// import VehicleList from '../components/VehicleList';
+import React from 'react';
+import { useVehicleContext } from '../utils/vehicleContext';
+import { useUserInputContext } from '../utils/userInputContext';
+import { useHistory } from 'react-router-dom';
 
-export default function Home() {
-	const [userInput, setUserInput] = useState('');
+function Home() {
+	const history = useHistory();
+	const { vehicle, setVehicle } = useVehicleContext();
+
+	const { userInput, setUserInput } = useUserInputContext();
 
 	const handleInputChange = (e) => {
 		const { value } = e.target;
@@ -12,7 +16,9 @@ export default function Home() {
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
-		window.location.href = `${window.location.href}vehicle-search`;
+		history.push('/vehicle-search');
+		console.log(userInput);
+		setVehicle(userInput);
 	};
 
 	return (
@@ -38,7 +44,7 @@ export default function Home() {
 						name="userInput"
 						onChange={handleInputChange}
 						type="text"
-						placeholder="Enter vehicle VIN or Rego Number"
+						placeholder="Enter VIN"
 					/>
 					<button
 						type="button"
@@ -66,3 +72,5 @@ export default function Home() {
 		</div>
 	);
 }
+
+export default Home;

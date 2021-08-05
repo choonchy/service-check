@@ -1,15 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { QUERY_SINGLE_VEHICLE } from '../utils/queries';
 import { useVehicleContext } from '../utils/vehicleContext';
-import VehicleCard, { searchVehicle } from '../components/VehicleCard';
+import VehicleCard from '../components/VehicleCard';
+import { useUserInputContext } from '../utils/userInputContext';
 
 function VehicleSearch() {
-	const [userInput, setUserInput] = useState('');
+	const { userInput, setUserInput } = useUserInputContext();
 
 	const { vehicle, setVehicle } = useVehicleContext();
 
 	const [executeSearch, { loading, data }] = useLazyQuery(QUERY_SINGLE_VEHICLE);
+
+	const userInputRef = useRef(userInput);
+
+	useEffect(() => {
+		if (userInputRef.current) {
+			searchVehicle(userInputRef.current);
+		}
+	}, []);
 
 	useEffect(() => {
 		setVehicle(data?.vehicle);
@@ -37,8 +46,8 @@ function VehicleSearch() {
 	};
 
 	return (
-		<div>
-			<form className="flex flex-col items-center md:w-6/12 m-2">
+		<div className="mt-16 w-screen flex flex-col justify-center items-center h-4/6">
+			<form className="flex flex-col items-center justify-center md:w-6/12 m-2">
 				<input
 					className="w-11/12 md:w-9/12 bg-purple-100 rounded-2xl text-center p-3 m-1"
 					value={userInput}
@@ -56,7 +65,15 @@ function VehicleSearch() {
 					Submit
 				</button>
 			</form>
-			{!vehicle ? '' : <VehicleCard />}
+			{!loading ? (
+				!vehicle ? (
+					<p className="text-red-600">No results found for this VIN number.</p>
+				) : (
+					<VehicleCard />
+				)
+			) : (
+				<p>Loading...</p>
+			)}
 		</div>
 	);
 }

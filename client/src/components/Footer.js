@@ -2,24 +2,26 @@ import React from 'react';
 
 export default function Footer() {
 	return (
-		<div className="w-screen text-white text-center relative md:fixed md:bottom-0 bg-purple-600 p-5 mt-2">
+		<div className="w-screen text-white text-center fixed bottom-0 bg-purple-600 p-2 md:p-5 mt-2">
 			<p>&#169; Service Check Pty Ltd</p>
-			<p>Full MERN stack application developed by Tom Chappell</p>
-			<a
-				href="https://github.com/choonchy"
-				target="_blank"
-				rel="noreferrer"
-				className="mr-2"
-			>
-				GitHub
-			</a>
-			<a
-				href="https://www.linkedin.com/in/tom-chappell-05a539140/"
-				target="_blank"
-				rel="noreferrer"
-			>
-				LinkedIn
-			</a>
+			<div className="hidden md:visible">
+				<p>Full MERN stack application developed by Tom Chappell</p>
+				<a
+					href="https://github.com/choonchy"
+					target="_blank"
+					rel="noreferrer"
+					className="mr-2"
+				>
+					GitHub
+				</a>
+				<a
+					href="https://www.linkedin.com/in/tom-chappell-05a539140/"
+					target="_blank"
+					rel="noreferrer"
+				>
+					LinkedIn
+				</a>
+			</div>
 			<div>
 				Icons made by{' '}
 				<a href="https://www.freepik.com" title="Freepik">
