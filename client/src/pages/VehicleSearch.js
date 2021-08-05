@@ -22,8 +22,7 @@ function VehicleSearch() {
 
 	useEffect(() => {
 		setVehicle(data?.vehicle);
-		console.log(vehicle);
-	}, [data, setVehicle, vehicle]);
+	}, [data, setVehicle]);
 
 	const searchVehicle = (vin) => {
 		executeSearch({
