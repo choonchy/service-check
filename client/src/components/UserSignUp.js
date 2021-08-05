@@ -13,7 +13,7 @@ const UserSignUp = () => {
 		password: '',
 		duplicatePassword: '',
 	});
-	const [addUser, { error, data }] = useMutation(ADD_USER);
+	const [addUser] = useMutation(ADD_USER);
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
