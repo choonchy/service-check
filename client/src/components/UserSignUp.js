@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 
-import Auth from '../utils/auth';
+import Auth from '../utils/Auth';
 
 const UserSignUp = () => {
 	const [formState, setFormState] = useState({
@@ -27,20 +27,22 @@ const UserSignUp = () => {
 		e.preventDefault();
 		console.log(formState);
 
-		try {
-			const { data } = await addUser({
-				variables: {
-					fullName: `${formState.firstName} ${formState.lastName}`,
-					email: formState.email,
-					password: formState.password,
-				},
-			});
+		if (formState.password === formState.duplicatePassword) {
+			try {
+				const { data } = await addUser({
+					variables: {
+						fullName: `${formState.firstName} ${formState.lastName}`,
+						email: formState.email,
+						password: formState.password,
+					},
+				});
 
-			console.log(data);
+				console.log(data);
 
-			Auth.login(data.addUser.token);
-		} catch (e) {
-			console.error(e);
+				Auth.login(data.addUser.token);
+			} catch (e) {
+				console.error(e);
+			}
 		}
 	};
 	return (
@@ -87,13 +89,19 @@ const UserSignUp = () => {
 				type="password"
 				placeholder="Repeat Password"
 			/>
-			<button
-				type="button"
-				onClick={handleFormSubmit}
-				className="bg-purple-600 rounded-2xl w-6/12 md:w-3/12 p-3 m-1 text-white"
-			>
-				Search
-			</button>
+			{formState.password !== formState.duplicatePassword ? (
+				<p className="bg-red-100 text-center rounded-2xl w-6/12 md:w-4/12 p-3 m-1 text-red-600">
+					Passwords must match!
+				</p>
+			) : (
+				<button
+					type="button"
+					onClick={handleFormSubmit}
+					className="bg-purple-600 rounded-2xl w-6/12 md:w-4/12 p-3 m-1 text-white"
+				>
+					Sign Up
+				</button>
+			)}
 		</form>
 	);
 };

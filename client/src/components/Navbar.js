@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import Auth from '../utils/Auth';
 
 const Navbar = ({ currentPage, handlePageChange }) => {
 	const [isOpen, setisOpen] = useState(false);
+	const logout = (e) => {
+		e.preventDefault();
+		Auth.logout();
+	};
 
 	function handleClick() {
 		setisOpen(!isOpen);
@@ -37,7 +42,13 @@ const Navbar = ({ currentPage, handlePageChange }) => {
 						: 'hidden'
 				} `}
 			>
-				<li className="flex flex-col md:flex-row text-purple-600">
+				<li className="flex flex-col md:flex-row text-purple-600 items-center">
+					<a
+						href="/vehicle-search"
+						className="m-1 p-2 hover:bg-purple-600 hover:text-white hover:shadow-inner duration-300 rounded-xl"
+					>
+						Search
+					</a>
 					<a
 						href="/about"
 						className="m-1 p-2 hover:bg-purple-600 hover:text-white hover:shadow-inner duration-300 rounded-xl"
@@ -50,12 +61,30 @@ const Navbar = ({ currentPage, handlePageChange }) => {
 					>
 						FAQ
 					</a>
-					<a
-						href="/login"
-						className="m-1 p-2 hover:bg-purple-600 hover:text-white hover:shadow-inner duration-300 rounded-xl"
-					>
-						Log In/Sign Up
-					</a>
+					{Auth.loggedIn() ? (
+						<div className=" flex flex-col md:flex-row items-center">
+							<a
+								href="/profile"
+								className="m-1 p-2 hover:bg-purple-600 hover:text-white hover:shadow-inner duration-300 rounded-xl"
+							>
+								Profile
+							</a>
+							<a
+								href="/profile"
+								onClick={logout}
+								className="m-1 p-2 hover:bg-purple-600 hover:text-white hover:shadow-inner duration-300 rounded-xl"
+							>
+								Log Out
+							</a>
+						</div>
+					) : (
+						<a
+							href="/login"
+							className="m-1 p-2 hover:bg-purple-600 hover:text-white hover:shadow-inner duration-300 rounded-xl"
+						>
+							Log In/Sign Up
+						</a>
+					)}
 				</li>
 			</ul>
 		</nav>
