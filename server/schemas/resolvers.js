@@ -25,7 +25,7 @@ const resolvers = {
 		},
 
 		orders: async () => {
-			return await Order.find({ _id });
+			return await Order.find();
 		},
 		order: async (_, { _id }) => {
 			return await Order.findById({ _id });
@@ -46,21 +46,20 @@ const resolvers = {
 		},
 	},
 	Order: {
-		user(parent) {
-			const user = User.findOne({ _id: parent.user });
-			console.log(parent);
-			return user;
-		},
-		vehicle(parent) {
-			const vehicle = Vehicle.findOne({
+		async vehicle(parent) {
+			const vehicle = await Vehicle.findOne({
 				_id: parent.vehicle,
 			});
 			return vehicle;
 		},
+		async product(parent) {
+			const product = await Product.findOne({ _id: parent.product });
+			return product;
+		},
 	},
 	User: {
-		orders(parent) {
-			const orders = Order.find({ user: parent._id });
+		async orders(parent) {
+			const orders = await Order.find({ _id: { $in: parent.orders } });
 			return orders;
 		},
 	},
@@ -79,22 +78,25 @@ const resolvers = {
 		},
 		updateUser: async (_, { fullName, email }, context) => {
 			if (context.user) {
-				return await User.findByIdAndUpdate(
+				const user = await User.findByIdAndUpdate(
 					context.user._id,
 					{ fullName, email },
 					{
 						new: true,
 					}
 				);
+				const token = signToken(user);
+				return { token, user };
 			}
 			throw new AuthenticationError('Must be logged in!');
 		},
-		addOrder: async (_, { products, vehicle }, context) => {
+		addOrder: async (_, { product, vehicle }, context) => {
 			console.log(context);
 			if (context.user) {
-				const order = new Order({ product, vehicle });
+				const order = await Order.create({ product, vehicle });
+
 				await User.findByIdAndUpdate(context.user._id, {
-					$push: { orders: order },
+					$push: { orders: order._id },
 				});
 
 				return order;

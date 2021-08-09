@@ -28,7 +28,6 @@ export default function UpdateUserInfo() {
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
 		console.log(formState);
-
 		try {
 			const { data } = await updateUser({
 				variables: {
@@ -36,7 +35,8 @@ export default function UpdateUserInfo() {
 					email: formState.email,
 				},
 			});
-			console.log(data);
+			Auth.setToken(data.updateUser.token);
+			console.log(data.user);
 		} catch (e) {
 			console.error(e);
 		}

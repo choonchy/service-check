@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 function Home() {
 	const history = useHistory();
-	const { vehicle, setVehicle } = useVehicleContext();
+	const { setVehicle } = useVehicleContext();
 
 	const { userInput, setUserInput } = useUserInputContext();
 

@@ -27,18 +27,26 @@ export const ADD_USER = gql`
 export const UPDATE_USER = gql`
 	mutation updateUser($fullName: String!, $email: String!) {
 		updateUser(fullName: $fullName, email: $email) {
-			fullName
-			email
+			token
+			user {
+				_id
+				email
+				fullName
+			}
 		}
 	}
 `;
 
 export const ADD_ORDER = gql`
-	mutation addOrder($product: String!, $vehicle: String!) {
+	mutation addOrder($product: ID!, $vehicle: ID!) {
 		addOrder(product: $product, vehicle: $vehicle) {
 			orderDate
-			product
-			vehicle
+			product {
+				_id
+			}
+			vehicle {
+				_id
+			}
 		}
 	}
 `;

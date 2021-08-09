@@ -17,7 +17,11 @@ export const QUERY_SINGLE_USER = gql`
 			email
 			_id
 			orders {
+				_id
 				orderDate
+				product {
+					name
+				}
 				vehicle {
 					vin
 					regoNumber
@@ -69,19 +73,23 @@ export const QUERY_ORDERS = gql`
 `;
 
 export const QUERY_SINGLE_ORDER = gql`
-	query singleOrder($ID: ID) {
-		order(_id: $ID) {
+	query singleOrder($_id: ID!) {
+		order(_id: $_id) {
 			_id
 			orderDate
-			user {
-				_id
-				fullName
-				email
-			}
 			vehicle {
 				_id
 				regoNumber
 				vin
+				make
+				model
+				colour
+				serviceHistory {
+					serviceDate
+					odometer
+					notes
+					submittedBy
+				}
 			}
 		}
 	}

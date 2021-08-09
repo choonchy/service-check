@@ -14,10 +14,6 @@ const orderSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Vehicle',
 	},
-	user: {
-		type: Schema.Types.ObjectId,
-		ref: 'User',
-	},
 });
 
 const Order = model('Order', orderSchema);

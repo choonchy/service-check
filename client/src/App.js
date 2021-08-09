@@ -17,6 +17,7 @@ import Profile from './pages/Profile';
 import FAQ from './pages/FAQ';
 import About from './pages/About';
 import Orders from './pages/Orders';
+import SingleOrder from './pages/SingleOrder';
 import ProductProvider from './utils/productContext';
 import UpdateUserInfo from './components/UpdateUserInfo';
 import Auth from './utils/Auth';
@@ -75,6 +76,9 @@ function App() {
 								</Route>
 								<Route exact path="/orders">
 									<Orders />
+								</Route>
+								<Route path="/orders/:id">
+									<SingleOrder />
 								</Route>
 							</Switch>
 							<Footer />

@@ -1,11 +1,9 @@
 import { useQuery } from '@apollo/client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { QUERY_SINGLE_USER } from '../utils/queries';
 import Auth from '../utils/Auth';
-import { useRouteMatch } from 'react-router';
 
 export default function Profile() {
-	let { path, url } = useRouteMatch();
 	const { loading, data } = useQuery(QUERY_SINGLE_USER);
 
 	if (!Auth.loggedIn()) {
