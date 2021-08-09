@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { QUERY_SINGLE_VEHICLE } from '../utils/queries';
 import { useVehicleContext } from '../utils/vehicleContext';
 import VehicleCard from '../components/VehicleCard';
 import { useUserInputContext } from '../utils/userInputContext';
+
+import ProductList from '../components/ProductList';
 
 function VehicleSearch() {
 	const { userInput, setUserInput } = useUserInputContext();
@@ -66,9 +68,18 @@ function VehicleSearch() {
 			</form>
 			{!loading ? (
 				!vehicle ? (
-					<p className="text-red-600">No results found for this VIN number.</p>
+					!userInput ? (
+						<p className="text-red-600">
+							No results found for this VIN number.
+						</p>
+					) : (
+						''
+					)
 				) : (
-					<VehicleCard />
+					<div className="flex flex-col items-center">
+						<VehicleCard />
+						<ProductList />
+					</div>
 				)
 			) : (
 				<p>Loading...</p>

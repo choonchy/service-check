@@ -9,9 +9,17 @@ const typeDefs = gql`
 		orders: [Order]
 	}
 
+	type Product {
+		_id: ID
+		name: String
+		description: String
+		price: Float
+	}
+
 	type Order {
 		_id: ID
 		orderDate: String
+		product: String
 		vehicle: Vehicle
 		user: User
 	}
@@ -21,6 +29,10 @@ const typeDefs = gql`
 		user: User
 	}
 
+	type Checkout {
+		session: ID
+	}
+
 	type Vehicle {
 		_id: ID
 		vin: String
@@ -28,20 +40,38 @@ const typeDefs = gql`
 		make: String
 		model: String
 		colour: String
+		serviceHistory: [ServiceHistory]
+	}
+
+	type ServiceHistory {
+		_id: ID
+		vehicle: Vehicle
+		serviceDate: String
+		submittedBy: String
+		notes: String
+		odometer: Int
 	}
 
 	type Query {
 		users: [User]
 		orders: [Order]
 		vehicles: [Vehicle]
-		user(_id: ID!): User
+		products: [Product]
+		serviceHistories: [ServiceHistory]
+		user: User
+		currentUser: User
 		vehicle(vin: String): Vehicle
 		order(_id: ID!): Order
+		product(name: String!): Product
+		serviceHistory(_id: ID): ServiceHistory
+		checkout(products: [ID]!): Checkout
 	}
 
 	type Mutation {
 		addUser(fullName: String!, email: String!, password: String!): Auth
+		updateUser(fullName: String, email: String): User
 		login(email: String!, password: String!): Auth
+		addOrder(product: String!): Order
 	}
 `;
 

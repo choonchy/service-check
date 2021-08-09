@@ -1,0 +1,37 @@
+[
+	{
+		"serviceDate": "02/20/2004",
+		"vehicle": "610d33a41604825074090cb4",
+		"submittedBy": "Workshop",
+		"notes": "Basic service including oil + oil filter change",
+		"odometer": "203444"
+	},
+	{
+		"serviceDate": "02/09/1991",
+		"vehicle": "610d33a41604825074090cb4",
+		"submittedBy": "Workshop",
+		"notes": "Replaced CV joints. Rigorous service",
+		"odometer": "214046"
+	},
+	{
+		"serviceDate": "06/19/2020",
+		"vehicle": "610d33a41604825074090cb5",
+		"submittedBy": "Owner",
+		"notes": "Standard service",
+		"odometer": "43976"
+	},
+	{
+		"serviceDate": "01/20/2021",
+		"vehicle": "610d33a41604825074090cb5",
+		"submittedBy": "Owner",
+		"notes": "Standard service",
+		"odometer": "48863"
+	},
+	{
+		"serviceDate": "06/18/2021",
+		"vehicle": "610d33a41604825074090cb5",
+		"submittedBy": "Workshop",
+		"notes": "Standard service. Radiator replaced.",
+		"odometer": "51791"
+	}
+]

@@ -6,6 +6,7 @@ const Navbar = ({ currentPage, handlePageChange }) => {
 	const logout = (e) => {
 		e.preventDefault();
 		Auth.logout();
+		window.location.pathname = '/';
 	};
 
 	function handleClick() {

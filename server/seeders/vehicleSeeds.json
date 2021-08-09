@@ -1,9 +1,23 @@
 [
 	{
-		"vin": "123456789",
-		"regoNumber": "454vti",
+		"vin": "123456789123456",
+		"regoNumber": "454VTI",
 		"make": "Nissan",
 		"model": "Skyline",
 		"colour": "White"
+	},
+	{
+		"vin": "456789123456789",
+		"regoNumber": "724RPA",
+		"make": "Ford",
+		"model": "Focus",
+		"colour": "Blue"
+	},
+	{
+		"vin": "789123456789123",
+		"regoNumber": "RP64FQ",
+		"make": "Fiat",
+		"model": "500",
+		"colour": "Black"
 	}
 ]

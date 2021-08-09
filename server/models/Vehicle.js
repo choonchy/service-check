@@ -16,6 +16,10 @@ const vehicleSchema = new Schema({
 	colour: {
 		type: String,
 	},
+	serviceHistory: {
+		type: Schema.Types.ObjectId,
+		ref: 'ServiceHistory',
+	},
 });
 
 const Vehicle = model('Vehicle', vehicleSchema);

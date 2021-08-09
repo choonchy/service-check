@@ -23,3 +23,22 @@ export const ADD_USER = gql`
 		}
 	}
 `;
+
+export const UPDATE_USER = gql`
+	mutation updateUser($fullName: String!, $email: String!) {
+		updateUser(fullName: $fullName, email: $email) {
+			fullName
+			email
+		}
+	}
+`;
+
+export const ADD_ORDER = gql`
+	mutation addOrder($product: String!, $vehicle: String!) {
+		addOrder(product: $product, vehicle: $vehicle) {
+			orderDate
+			product
+			vehicle
+		}
+	}
+`;

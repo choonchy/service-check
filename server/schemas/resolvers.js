@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Vehicle, Order } = require('../models');
+const { User, Vehicle, Order, Product, ServiceHistory } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -7,23 +7,42 @@ const resolvers = {
 		users: async () => {
 			return await User.find();
 		},
-		vehicles: async () => {
-			return await Vehicle.find();
+		user: async (_, args) => {
+			return await User.find();
 		},
-		orders: async () => {
-			return await Order.find();
-		},
-		user: async (_, args, context) => {
+		currentUser: async (_, args, context) => {
 			if (context.user) {
-				return User.findOne({ _id: context.user._id }).populate('orders');
+				return User.findOne({ _id: context.user._id });
 			}
 			throw new AuthenticationError('You must be logged in!');
+		},
+
+		vehicles: async () => {
+			return await Vehicle.find();
 		},
 		vehicle: async (_, { vin }) => {
 			return await Vehicle.findOne({ vin });
 		},
+
+		orders: async () => {
+			return await Order.find({ _id });
+		},
 		order: async (_, { _id }) => {
-			return await Order.findOne({ _id });
+			return await Order.findById({ _id });
+		},
+
+		products: async () => {
+			return await Product.find();
+		},
+		product: async (_, { name }) => {
+			return await Product.findOne({ name });
+		},
+
+		serviceHistories: async () => {
+			return await ServiceHistory.find().populate('vehicle');
+		},
+		serviceHistory: async (_, { _id }) => {
+			return await ServiceHistory.findById({ _id });
 		},
 	},
 	Order: {
@@ -35,17 +54,20 @@ const resolvers = {
 		vehicle(parent) {
 			const vehicle = Vehicle.findOne({
 				_id: parent.vehicle,
-				vin: parent.vehicle,
 			});
-			console.log(parent);
 			return vehicle;
 		},
 	},
 	User: {
 		orders(parent) {
 			const orders = Order.find({ user: parent._id });
-			console.log(parent);
 			return orders;
+		},
+	},
+	Vehicle: {
+		serviceHistory(parent) {
+			const serviceHistory = ServiceHistory.find({ vehicle: parent._id });
+			return serviceHistory;
 		},
 	},
 
@@ -55,7 +77,31 @@ const resolvers = {
 			const token = signToken(user);
 			return { token, user };
 		},
-		login: async (parent, { email, password }) => {
+		updateUser: async (_, { fullName, email }, context) => {
+			if (context.user) {
+				return await User.findByIdAndUpdate(
+					context.user._id,
+					{ fullName, email },
+					{
+						new: true,
+					}
+				);
+			}
+			throw new AuthenticationError('Must be logged in!');
+		},
+		addOrder: async (_, { products, vehicle }, context) => {
+			console.log(context);
+			if (context.user) {
+				const order = new Order({ product, vehicle });
+				await User.findByIdAndUpdate(context.user._id, {
+					$push: { orders: order },
+				});
+
+				return order;
+			}
+			throw new AuthenticationError('Must be logged in!');
+		},
+		login: async (_, { email, password }) => {
 			const user = await User.findOne({ email });
 
 			if (!user) {

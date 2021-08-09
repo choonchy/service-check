@@ -1,32 +1,30 @@
 [
 	{
-		"fullName": "Brian Kernighan",
-		"email": "brian@email.com",
-		"password": "123456789"
+		"_id": "610bce758c6d39396c206dcb",
+		"fullName": "user one",
+		"email": "userone@email.com",
+		"password": "password123"
 	},
 	{
-		"fullName": "Brian Kernighan",
-		"email": "brian@email.com",
-		"password": "123456789"
+		"_id": "610bd20f8c6d39396c206dcd",
+		"fullName": "user two",
+		"email": "usertwo@email.com",
+		"password": "password123"
 	},
 	{
-		"fullName": "Brian Kernighan",
-		"email": "brian@email.com",
-		"password": "123456789"
+		"_id": "610bdfca8c6d39396c206dd2",
+		"fullName": "User Three",
+		"email": "userthree@email.com",
+		"password": "password123"
 	},
 	{
-		"fullName": "Brian Kernighan",
-		"email": "brian@email.com",
-		"password": "123456789"
-	},
-	{
-		"fullName": "Brian Kernighan",
-		"email": "brian@email.com",
-		"password": "123456789"
-	},
-	{
-		"fullName": "Brian Kernighan",
-		"email": "brian@email.com",
-		"password": "123456789"
+		"_id": "610fa0631d029167a07b5ba8",
+		"fullName": "Tom Chappell",
+		"email": "thomas.chappell@outlook.com",
+		"password": "password123",
+		"orders": [
+			{ "_id": "610e4b455eda9b19f85fc045" },
+			{ "_id": "610e4b455eda9b19f85fc046" }
+		]
 	}
 ]

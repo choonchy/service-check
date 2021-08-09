@@ -48,7 +48,7 @@ const UserLogIn = (props) => {
 				</p>
 			) : (
 				<form className="flex flex-col w-10/12 md:5/12 items-center justify-center">
-					<p classname="text-purple-600 mt-4">Already a customer?</p>
+					<p className="text-purple-600 mt-4">Already a customer?</p>
 					<h2 className="text-4xl m-2">Log In</h2>
 					{error ? (
 						<p className="my-4 text-center p-2 bg-red-100 text-red-600 rounded-xl">

@@ -8,6 +8,7 @@ export default function Header({ currentPage, handlePageChange }) {
 				ServiceCheck
 			</a>
 			<Navbar currentPage={currentPage} handlePageChange={handlePageChange} />
+			{/* <Cart /> */}
 		</header>
 	);
 }

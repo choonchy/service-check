@@ -47,7 +47,7 @@ const UserSignUp = () => {
 	};
 	return (
 		<form className="flex flex-col w-10/12 md:5/12 items-center justify-center border-b-2 border-purple-100 md:border-b-0 md:border-r-2 pb-2 mb-2">
-			<p classname="text-purple-600 mt-4">New to ServiceCheck™?</p>
+			<p className="text-purple-600 mt-4">New to ServiceCheck™?</p>
 			<h2 className="text-4xl m-2">Sign Up</h2>
 			<input
 				className="w-11/12 md:w-5/12 bg-purple-100 rounded-2xl text-center p-3 m-1"

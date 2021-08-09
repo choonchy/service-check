@@ -28,12 +28,6 @@ const VehicleCard = () => {
 					{vehicle.colour}
 				</p>
 			</div>
-			<div className="text-center m-1 text-purple-600 bold text-xl flex items-center flex-row mb-4">
-				<p className="p-3 bg-purple-100 rounded-l-2xl">$12.00</p>
-				<button className="p-3 bg-purple-600 text-white rounded-r-2xl">
-					Add to cart
-				</button>
-			</div>
 		</div>
 	);
 };

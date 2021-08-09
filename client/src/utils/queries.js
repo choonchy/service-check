@@ -11,9 +11,11 @@ export const QUERY_USERS = gql`
 `;
 
 export const QUERY_SINGLE_USER = gql`
-	query singleUser($ID: ID) {
-		user(_id: $ID) {
+	query singleUser {
+		currentUser {
 			fullName
+			email
+			_id
 			orders {
 				orderDate
 				vehicle {
@@ -48,8 +50,8 @@ export const QUERY_SINGLE_VEHICLE = gql`
 `;
 
 export const QUERY_ORDERS = gql`
-	query allOrders {
-		orders {
+	query allOrders($ID: ID!) {
+		orders(_id: $ID) {
 			_id
 			orderDate
 			user {
@@ -81,6 +83,25 @@ export const QUERY_SINGLE_ORDER = gql`
 				regoNumber
 				vin
 			}
+		}
+	}
+`;
+
+export const QUERY_CHECKOUT = gql`
+	query getCheckout($product: [ID]!) {
+		checkout(product: $product) {
+			session
+		}
+	}
+`;
+
+export const QUERY_PRODUCT = gql`
+	query product {
+		products {
+			name
+			_id
+			description
+			price
 		}
 	}
 `;

@@ -6,13 +6,17 @@ const orderSchema = new Schema({
 		default: Date.now,
 		required: true,
 	},
-	user: {
+	product: {
 		type: Schema.Types.ObjectId,
-		ref: 'User',
+		ref: 'Product',
 	},
 	vehicle: {
 		type: Schema.Types.ObjectId,
 		ref: 'Vehicle',
+	},
+	user: {
+		type: Schema.Types.ObjectId,
+		ref: 'User',
 	},
 });
 
