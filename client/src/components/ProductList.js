@@ -39,7 +39,7 @@ const ProductList = () => {
 									console.log(user);
 									e.preventDefault();
 									if (!Auth.loggedIn()) {
-										return;
+										return window.location.assign('/login');
 									}
 									try {
 										await addOrder({
@@ -51,6 +51,7 @@ const ProductList = () => {
 									} catch (e) {
 										console.error(e);
 									}
+									return window.location.assign('/orders');
 								}}
 								className="p-3 bg-purple-600 text-white rounded-r-2xl hover:bg-purple-400 cursor-pointer"
 							>
