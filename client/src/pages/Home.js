@@ -16,9 +16,9 @@ function Home() {
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
+		setVehicle(userInput);
 		history.push('/vehicle-search');
 		console.log(userInput);
-		setVehicle(userInput);
 	};
 
 	return (

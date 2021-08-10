@@ -20,7 +20,7 @@ function VehicleSearch() {
 		if (userInputRef.current) {
 			searchVehicle(userInputRef.current);
 		}
-	});
+	}, []);
 
 	useEffect(() => {
 		setVehicle(data?.vehicle);
